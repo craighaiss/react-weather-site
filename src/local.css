@@ -1,0 +1,17 @@
+.forecast {
+    margin-top: 30px;
+}
+
+.localWeatherCardGroup {
+    width: 600px;
+}
+
+.localWeatherCard {
+    margin-right: 4px;
+    opacity: 0.8;
+}
+
+.boldCenter {
+    text-align: center;
+    font-weight: bold;
+}

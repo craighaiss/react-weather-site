@@ -1,0 +1,15 @@
+.forecast {
+    margin-top: 30px;
+}
+
+.weatherCardGroup {
+    margin-right: 20px;
+}
+
+.weatherCard {
+    margin-right: 4px;
+    opacity: 0.8;
+}
+
+
+/* Need to create a vertical layout for mobile devices */
