@@ -11,7 +11,6 @@ export class CurrentDate extends Component {
     } 
 
     render() {
-        console.log(this.state.date);
         return (
             <span>{this.state.date}</span>
         );
