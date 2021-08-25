@@ -8,6 +8,7 @@ import rainy from './_images/rainy.png';
 import stormy from './_images/stormy.png';
 import sunny from './_images/sunny.png';
 import './local.css';
+import { CityContext } from "./App";
 
 export function Local() {
 
@@ -50,41 +51,43 @@ export function Local() {
     }
 
     return (
-        <section>
-            <div className="forecast">
-            <h2>Local weather forecast (Detroit, MI)</h2>
-            <CurrentDate />
-            <div>
-                {!weather.FeelsLikeF ? (
-                    <div>loading...</div> 
-                ) : (
-                    <div>
-                        <CardGroup className="localWeatherCardGroup">
-                            <Card className="localWeatherCard">
-                                <Card.Img variant="top" src={renderWeatherIcon(weather.weatherDesc[0].value)} />
-                                <Card.Body>
-                                    <Card.Text>
-                                    <p className="boldCenter">{weather.weatherDesc[0].value}, {weather.FeelsLikeF}F</p>
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                            <Card className="localWeatherCard">
-                                <Card.Body>
-                                    <Card.Title>Detailed weather</Card.Title>
-                                    <Card.Text>
-                                    <p><b>Humidity: </b>{weather.humidity}%</p>
-                                    <p><b>Cloud cover: </b>{weather.cloudcover}%</p>
-                                    <p><b>Precipitation: </b>{weather.precipInches} in</p>
-                                    <p><b>Wind: </b>{weather.windspeedMiles} mph, {weather.winddir16Point}</p>
-                                    <p><b>UV index: </b>{weather.uvIndex}</p>
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </CardGroup>
+        <CityContext.Consumer>
+            {({ citySelected }) => (
+                <section>
+                    <div className="forecast">
+                        <h2>Local weather forecast ( {citySelected} )</h2>
+                        <CurrentDate />
+                        <div>
+                            {!weather.FeelsLikeF ? (
+                                <div>loading...</div> 
+                            ) : (
+                                <div>
+                                    <CardGroup className="localWeatherCardGroup">
+                                        <Card className="localWeatherCard">
+                                            <Card.Img variant="top" src={renderWeatherIcon(weather.weatherDesc[0].value)} />
+                                            <Card.Body>
+                                                <Card.Text className="boldCenter">
+                                                {weather.weatherDesc[0].value}, {weather.FeelsLikeF}F
+                                                </Card.Text>
+                                            </Card.Body>
+                                        </Card>
+                                        <Card className="localWeatherCard">
+                                            <Card.Body>
+                                                <Card.Title>Detailed weather</Card.Title>
+                                                <Card.Text><b>Humidity: </b>{weather.humidity}%</Card.Text>
+                                                <Card.Text><b>Cloud cover: </b>{weather.cloudcover}%</Card.Text>
+                                                <Card.Text><b>Precipitation: </b>{weather.precipInches} in</Card.Text>
+                                                <Card.Text><b>Wind: </b>{weather.windspeedMiles} mph, {weather.winddir16Point}</Card.Text>
+                                                <Card.Text><b>UV index: </b>{weather.uvIndex}</Card.Text>
+                                            </Card.Body>
+                                        </Card>
+                                    </CardGroup>
+                                </div>
+                            )}
+                        </div>
                     </div>
-                )}
-            </div>
-            </div>
-        </section>
+                </section>
+            )}
+        </CityContext.Consumer>
     )
 }
